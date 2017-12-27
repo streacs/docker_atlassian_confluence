@@ -56,6 +56,9 @@ RUN set -x \
 ADD files/service /usr/local/bin/service
 ADD files/entrypoint /usr/local/bin/entrypoint
 
+RUN set -x \
+  && touch -d "@0" "${APPLICATION_INST}/confluence/WEB-INF/classes/confluence-init.properties"
+
 VOLUME ${APPLICATION_HOME}
 
 EXPOSE 8090 8091

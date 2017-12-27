@@ -1,1 +1,7 @@
 #!/bin/bash
+
+if [ "$(stat -c "%Y" "${APPLICATION_INST}/confluence/WEB-INF/classes/confluence-init.properties")" -eq "0" ]; then
+  sed --in-place "s~# confluence.home=c:\/confluence\/data~confluence.home=$APPLICATION_HOME~" ${APPLICATION_INST}/confluence/WEB-INF/classes/confluence-init.properties
+fi
+
+exec "$@"
