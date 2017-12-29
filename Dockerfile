@@ -26,7 +26,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN set -x \
   && apt-get update \
-  && apt-get -y --no-install-recommends install wget
+  && apt-get -y --no-install-recommends install wget xmlstarlet
 
 RUN set -x \
   && wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" -O /tmp/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.tar.gz http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/${JAVA_VERSION_PATH}/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.tar.gz \
@@ -52,3 +52,23 @@ RUN set -x \
   && apt-get clean \
   && rm -rf /var/cache/* \
   && rm -rf /tmp/*
+
+ADD files/service /usr/local/bin/service
+ADD files/entrypoint /usr/local/bin/entrypoint
+
+RUN set -x \
+  && touch -d "@0" "${APPLICATION_INST}/confluence/WEB-INF/classes/confluence-init.properties" \
+  && touch -d "@0" "${APPLICATION_INST}/bin/setenv.sh" \
+  && touch -d "@0" "${APPLICATION_INST}/conf/server.xml"
+
+VOLUME ${APPLICATION_HOME}
+
+EXPOSE 8090 8091
+
+ENTRYPOINT ["/usr/local/bin/entrypoint"]
+
+USER ${SYSTEM_USER}
+
+WORKDIR ${APPLICATION_HOME}
+
+CMD ["/usr/local/bin/service"]
