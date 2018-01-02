@@ -67,6 +67,7 @@ public class PlanSpec {
             project(),
             "STREACS Atlassian Confluence", "EF74EC")
             .enabled(true)
+            .noNotifications()
             .linkedRepositories("DCK - STREACS Atlassian Confluence (master)")
             .planBranchManagement(new PlanBranchManagement()
                 .createForVcsBranchMatching("^feature/.*|^release/.*|^develop")
