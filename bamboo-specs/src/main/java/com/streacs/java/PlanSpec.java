@@ -67,6 +67,8 @@ public class PlanSpec {
             project(),
             "STREACS Atlassian Confluence", "EF74EC")
             .enabled(true)
+            .noPluginConfigurations()
+            .noNotifications()
             .linkedRepositories("DCK - STREACS Atlassian Confluence (master)")
             .planBranchManagement(new PlanBranchManagement()
                 .createForVcsBranchMatching("^feature/.*|^release/.*|^develop")
@@ -100,7 +102,7 @@ public class PlanSpec {
                             deployTask()
                         )
                         .tasks(
-                            cleanTask()
+                            removeTask()
                         )
                 )
             );
@@ -138,12 +140,12 @@ public class PlanSpec {
             .fileFromPath("Buildfile")
             .argument("deploy");
     }
-    ScriptTask cleanTask() {
+    ScriptTask removeTask() {
         return new ScriptTask()
             .description("Build Docker container")
             .location(ScriptTaskProperties.Location.FILE)
             .fileFromPath("Buildfile")
-            .argument("clean");
+            .argument("remove");
     }
 
 }
