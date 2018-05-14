@@ -40,3 +40,6 @@ Add following environment variable to your configuration :
 
 ## Source Code
 [Github](https://github.com/streacs/docker_atlassian_confluence)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
