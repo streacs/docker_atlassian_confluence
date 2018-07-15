@@ -74,7 +74,7 @@ public class PlanSpec {
                 .createForVcsBranchMatching("^feature/.*|^release/.*|^develop")
                 .triggerBuildsLikeParentPlan()
                 .delete(new BranchCleanup()
-                    .whenInactiveInRepositoryAfterDays(5)))
+                    .whenInactiveInRepositoryAfterDays(7)))
             .description("Plan created from (https://scm.streacs.com/projects/DCK/repos/streacs_atlassian_confluence)")
             .triggers(
                 new ScheduledTrigger()
