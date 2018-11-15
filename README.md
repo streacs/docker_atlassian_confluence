@@ -10,17 +10,21 @@ docker run -ti -e ORACLE_JAVA_EULA=accepted -p 8090:8090 -p 8091:8091 streacs/at
 ```
 
 ## Environment Variables
-* ORACLE_JAVA_EULA
-* JVM_ARGUMENTS
-* SYSTEM_USER = confluence
-* SYSTEM_GROUP = confluence
-* SYSTEM_HOME = /home/confluence
-* APPLICATION_INST = /opt/atlassian/confluence
-* APPLICATION_HOME = /var/opt/atlassian/application-data/confluence
-* TOMCAT_PROXY_NAME =
-* TOMCAT_PROXY_PORT =
-* TOMCAT_PROXY_SCHEME =
-* TOMCAT_PROXY_SECURE =
+* (M) ORACLE_JAVA_EULA = accepted
+* (O) JVM_ARGUMENTS =
+* (I) SYSTEM_USER = confluence
+* (I) SYSTEM_GROUP = confluence
+* (I) SYSTEM_HOME = /home/confluence
+* (I) APPLICATION_INST = /opt/atlassian/confluence
+* (I) APPLICATION_HOME = /var/opt/atlassian/application-data/confluence
+* (O) TOMCAT_PROXY_NAME = www.example.com
+* (O) TOMCAT_PROXY_PORT = 80|443
+* (O) TOMCAT_PROXY_SCHEME = http|https
+* (O) TOMCAT_PROXY_SECURE = false|true
+* (O) JVM_MEMORY_MIN = 1024m
+* (O) JVM_MEMORY_MAX = 2048m
+
+(M) = Mandatory / (O) = Optional / (I) Information
 
 ## Ports
 * 8090 = Default HTTP Connector
@@ -37,6 +41,23 @@ Add following environment variable to your configuration :
 ```bash
 -e ORACLE_JAVA_EULA=accepted
 ```
+
+## Examples
+
+Modify JVM memory
+```bash
+docker run -ti -e ORACLE_JAVA_EULA=accepted -p 8090:8090 -p 8091:8091 -e JVM_MEMORY_MIN=1024m -e JVM_MEMORY_MAX=2048m streacs/atlassian-confluence:x.x.x
+```
+
+Persist application data
+```bash
+docker run -ti -e ORACLE_JAVA_EULA=accepted -p 8090:8090 -p 8091:8091 -v CONFLUENCE-DATA:/var/opt/atlassian/application-data/confluence streacs/atlassian-confluence:x.x.x
+```
+
+## Databases
+
+This image doesn't include the MySQL JDBC driver.
+Please use PostgreSQL.
 
 ## Source Code
 [Github](https://github.com/streacs/docker_atlassian_confluence)
