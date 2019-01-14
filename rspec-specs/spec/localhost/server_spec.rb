@@ -12,12 +12,6 @@ describe user('confluence') do
   it { should have_login_shell '/bin/false' }
 end
 
-describe file('/opt/jdk') do
-  it { should be_directory }
-  it { should be_owned_by 'root' }
-  it { should be_grouped_into 'root' }
-end
-
 describe file('/home/confluence') do
   it { should be_directory }
   it { should be_owned_by 'confluence' }
