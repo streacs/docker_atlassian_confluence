@@ -23,7 +23,7 @@ RUN set -x \
 
 RUN set -x \
   && apt-get update \
-  && apt-get -y --no-install-recommends install wget xmlstarlet ca-certificates ruby-rspec openjdk-8-jdk-headless \
+  && apt-get -y --no-install-recommends install wget xmlstarlet ca-certificates ruby-rspec openjdk-8-jdk \
   && gem install serverspec
 
 RUN set -x \
